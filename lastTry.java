@@ -1,3 +1,5 @@
+package kataTest2ndTry;
+
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.Scanner;
 
@@ -76,6 +78,11 @@ public class lastTry {
         secondOperand = parts[1];
 
         boolean isRoman = Roman.isRoman(firstOperand) && Roman.isRoman(secondOperand);
+        if (!Roman.isRoman(firstOperand) && Roman.isRoman(secondOperand)) {
+            throw new IllegalArgumentException("используются одновременно разные системы счисления");
+        } else if (Roman.isRoman(firstOperand) && !Roman.isRoman(secondOperand)) {
+            throw new IllegalArgumentException("используются одновременно разные системы счисления");
+        }
         int num1 = isRoman ? Roman.toArabic(firstOperand) : Integer.parseInt(firstOperand);
         int num2 = isRoman ? Roman.toArabic(secondOperand) : Integer.parseInt(secondOperand);
         if (num1 > 10 || num1 < 1 || num2 > 10 || num2 < 1){
@@ -94,7 +101,10 @@ public class lastTry {
         if (isRoman){
             if (result < 0){
                 System.out.println("В римской системе исчесления нет отрицательных чисел");
-            } else if (result > 0) {
+            } else if (result == 0) {
+                throw new IllegalArgumentException("В системе римских цифр отсутствует ноль");
+            }
+            if (result > 0) {
                 System.out.println("Ответ: " + Roman.fromArabic(result));
             }
         } else {
